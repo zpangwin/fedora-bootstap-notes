@@ -77,7 +77,9 @@ Fstab contents
 
 can now reboot. after reboot, login as root:
 
-    getenforce -> showed as Enforcing. weird that /etc/sysconfig/selinux was ignored but I was going to turn it back on anyway
+    getenforce
+    // showed as Enforcing
+    // weird that /etc/sysconfig/selinux was ignored but I was going to turn it back on anyway
     dnf groupinstall -y 'Xfce Desktop';
     reboot now;
 
