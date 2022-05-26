@@ -40,4 +40,4 @@ If you are new to this, I highly recommend Animortis Productions' youtube video 
 
 
 1. Youtube: [Fedora 36 Bootstrap Installation by Animortis Productions](https://www.youtube.com/watch?v=hjR37L2xC6g)
-2. Reddit: [Fedora commandline bootstrap installation](https://www.reddit.com/r/Fedora/comments/uub5b8/fedora_linux_commandline_bootstrap_installation/) - mostly this just links to video above but there could potentially be additional comments added on the reddit side.
+2. Reddit: [/u/ReckZero](https://www.reddit.com/user/ReckZero)'s [Fedora commandline bootstrap installation](https://www.reddit.com/r/Fedora/comments/uub5b8/fedora_linux_commandline_bootstrap_installation/) post - mostly this just a post by the video author linking to the youtube video above. Adding in case the reddit thread ends up getting any useful comments later.
