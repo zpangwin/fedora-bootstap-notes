@@ -27,8 +27,8 @@ You have been warned. ;-)
 
 | Setup name                       | System    | Rootfs | Bootloader   | LUKS | Swap | Multi-OS | Brief Description |
 |:--------------------------------:|:---------:|:------:|:------------:|:----:|:----:|:--------:|:-----------------:|
-| 000-reckzero-bootstrap-setup.md  | UEFI only | ext4   | GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
-| 001-btrfs+scripting.md           | UEFI only | btrfs  | GRUB2        | no   | yes  | no       | focus on scripting prompts + btrfs |
+| [000-reckzero-bootstrap-setup.md](./000-reckzero-bootstrap-setup.md)  | UEFI only | ext4   | GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
+| [001-btrfs+scripting.md](./001-btrfs+scripting.md)           | UEFI only | btrfs  | GRUB2        | no   | yes  | no       | focus on scripting prompts + btrfs |
 
 
 
@@ -36,7 +36,7 @@ You have been warned. ;-)
 
 Links to info I used to get started. I had seen a few comments online referring to running `dnf --releasever=XX --installroot=/mnt groupinstall core` but I'm reserving this for pages that had more significant and detailed info than that.
 
-If you are new to this, I highly recommend Animortis Productions' youtube video as it will give you a nice step-by-step for a simple setup and let you get a better understanding of the process before jumping into more complex setups. I have the commands I used for following that the video available in the file: 000-reckzero-bootstrap-setup.md
+If you are new to this, I highly recommend Animortis Productions' youtube video as it will give you a nice step-by-step for a simple setup and let you get a better understanding of the process before jumping into more complex setups. I have the commands I used for following that the video available in the file: [000-reckzero-bootstrap-setup.md](./000-reckzero-bootstrap-setup.md)
 
 
 1. Youtube: [Fedora 36 Bootstrap Installation by Animortis Productions](https://www.youtube.com/watch?v=hjR37L2xC6g)
