@@ -58,7 +58,7 @@ Inside Chroot
     echo "tmpfs /tmp tmpfs rw,seclabel,nosuid,nodev,inode64 0 0" >> /etc/fstab;
     printf 'UUID=%s  swap swap defaults 0 0\n' "$(blkid -s UUID -o value /dev/vda2)" >> /etc/fstab;
     clear;echo "-------------------"; cat /etc/fstab;
-    dnf install -y btrfs-progs e2fsprogs vim tree;
+    dnf install -y btrfs-progs e2fsprogs vim tree efibootmgr;
     dnf install -y kernel grub2-efi-x64 grub2-efi-x64-modules shim;
     sed -i 's/^SELINUX=enforcing/SELINUX=permissive/g' /etc/sysconfig/selinux;
     grep ^SELINUX= /etc/sysconfig/selinux;

@@ -28,7 +28,7 @@ You have been warned. ;-)
 | Setup name                       | System    | Rootfs | Bootloader   | LUKS | Swap | Multi-OS | Brief Description |
 |:--------------------------------:|:---------:|:------:|:------------:|:----:|:----:|:--------:|:-----------------:|
 | [000-reckzero-bootstrap-setup.md](./000-reckzero-bootstrap-setup.md)  | UEFI only | ext4   | GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
-| [001-btrfs+scripting.md](./001-btrfs+scripting.md)           | UEFI only | btrfs  | GRUB2        | no   | yes  | no       | focus on scripting prompts + btrfs |
+| 001-btrfs+scripting.md [uefi](./001a-btrfs+scripting-uefi.md) \| [bios](./001b-btrfs+scripting-bios.md)          | UEFI or BIOS | btrfs  | GRUB2        | no   | yes  | no       | focus on scripting prompts + btrfs |
 
 
 
