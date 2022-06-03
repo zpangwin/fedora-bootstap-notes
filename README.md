@@ -28,6 +28,7 @@ You have been warned. ;-)
 | Setup name                       | Status | System    | Rootfs | Subvols? | Bootloader   | LUKS | Swap | Multi-OS | Brief Description |
 |:--------------------------------:|:------:|:---------:|:------:|:------:|:------------:|:----:|:----:|:--------:|:-----------------:|
 | [reckzero-uefi-ext4-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md) | WIP | UEFI | ext4 | N/A |  GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
+| [bios-001_btrfs-no-subvols.md](./bios-001_btrfs-no-subvols.md) | Passed  | BIOS | btrfs  | none | GRUB2        | no   | yes  | no       | focus on scripting prompts + btrfs |
 | [uefi-001_btrfs-no-subvols](./uefi-001_btrfs-no-subvols)   | WIP     | UEFI | btrfs  | none | GRUB2        | no   | yes  | no       | focus on scripting prompts + btrfs |
 
 ## Virt-manager configuration
@@ -62,5 +63,5 @@ Links to info I used to get started. I had seen a few comments online referring 
 If you are new to this, I highly recommend Animortis Productions' youtube video as it will give you a nice step-by-step for a simple setup and let you get a better understanding of the process before jumping into more complex setups. I have the commands I used for following that the video available in the file: [000-reckzero-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md)
 
 
-1. Youtube: [Fedora 36 Bootstrap Installation by Animortis Productions](https://www.youtube.com/watch?v=hjR37L2xC6g)
-2. Reddit: [/u/ReckZero](https://www.reddit.com/user/ReckZero)'s [Fedora commandline bootstrap installation](https://www.reddit.com/r/Fedora/comments/uub5b8/fedora_linux_commandline_bootstrap_installation/) post - mostly this just a post by the video author linking to the youtube video above. Adding in case the reddit thread ends up getting any useful comments later.
+1. Youtube: [Fedora 36 Bootstrap Installation](https://www.youtube.com/watch?v=hjR37L2xC6g), by Animortis Productions, published 2022-May-21.
+2. Reddit: [/u/ReckZero](https://www.reddit.com/user/ReckZero)'s [Fedora commandline bootstrap installation](https://www.reddit.com/r/Fedora/comments/uub5b8/fedora_linux_commandline_bootstrap_installation/) post, created 2022-May-21. This mostly is just a post by the video author linking to the youtube video above. Adding in case the reddit thread ends up getting any useful comments later.
