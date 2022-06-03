@@ -77,10 +77,10 @@ printf 'UUID=%s  /  btrfs  ol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o valu
 
 if [[ 'uefi' == "${SYSTEM_TYPE}" ]]; then
 	# fstab entry for root / os partition
-    printf '%s  /  btrfs  compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" >> /etc/fstab;
+    printf 'UUID=%s  /  btrfs  compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" >> /etc/fstab;
 
     # fstab entry for UEFI /boot/efi partition
-    printf '%s  /boot/efi  vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,errors=remount-ro 0 0\n' "$(blkid -s UUID -o value /dev/vda1)" >> /etc/fstab;
+    printf 'UUID=%s  /boot/efi  vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,errors=remount-ro 0 0\n' "$(blkid -s UUID -o value /dev/vda1)" >> /etc/fstab;
 else
 	# fstab entry for root / os partition
     printf 'UUID=%s  /  btrfs  compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda2)" >> /etc/fstab;
