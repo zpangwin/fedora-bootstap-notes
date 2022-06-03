@@ -68,7 +68,7 @@ alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias q='exit';
 # create and format partitions
 if [[ 'uefi' == "${SYSTEM_TYPE}" ]]; then
 	# format GPT partitions
-    mkfs.vfat -n "efi" -F 32 /dev/vda1;
+    mkfs.vfat -n "EFI" -F 32 /dev/vda1;
     mkfs.ext4 -F -L "boot" /dev/vda2;
     mkfs.btrfs -L "ospart" --force /dev/vda3;
 
