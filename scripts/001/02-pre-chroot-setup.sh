@@ -82,7 +82,7 @@ else
     mkfs.ext4 -F -L "boot" /dev/vda1;
     mkfs.btrfs -L "ospart" --force /dev/vda2;
 
-	# mount GPT partitions
+	# mount MBR partitions
     mount /dev/vda2 /mnt;
     mkdir -p /mnt/boot;
     mount /dev/vda1 /mnt/boot;
