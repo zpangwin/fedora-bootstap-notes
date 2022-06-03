@@ -1,12 +1,44 @@
 # Description
 
-This is basically my just tweaking the install I had done in [000-reckzero-bootstrap-setup.md](./000-reckzero-bootstrap-setup.md). In this iteration, I was focusing mostly on writing scriptlets/one-liners/etc to reduce time spent typing responses into prompts and semi-automate the bootstrap process. After I get things working the way I want, I might finalize these into scripts and add links but for now, they're copy/paste.
+This is basically my just tweaking the install I had done in [reckzero-uefi-ext4-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md) . In this iteration, I was focusing mostly on writing scriptlets/one-liners/etc to reduce time spent typing responses into prompts and semi-automate the bootstrap process. After I get things working the way I want, I might finalize these into scripts and add links but for now, they're copy/paste.
 
-I'm also using a VM that has 4G RAM so I'm reducing the swap per the RAM x 2 rule to 8G (video had it as 12G).
+One of my goals is also to eventually tweak the instructions from the install to get as close as possible to a minimal install done normally with Anaconda from the ["Everything" netinstall iso](https://alt.fedoraproject.org/).
 
-Finally, I want to end up with btrfs and I figured that would be a pretty small change so I made that switch too. Currently, I'm just using an unnamed / default subvolume (e.g. `subvol=/`); nothing fancy.
 
-As in the original video will setup a basic (no desktop) Fedora install, then from there install Xfce and boot to desktop. Mostly the same as the original except my user is named "test" instead. :-)
+## Virt-manager configuration
+
+Host:
+
+* CPU: AMD FX-9590 with 8-cores
+* Memory: 32 GiB RAM
+* OS: Fedora 35
+
+My guest VMs were created in virt-manager with the following attributes:
+
+* Memory: 4096 bytes (e.g. 4 GiB)
+* CPUs: 2 (e.g. 2 cores)
+* 20 GiB virtual HDD space
+* UEFI\* / Q35 chipset (I did not use the secure boot option for this iteration).
+* defaults for everything else
+
+\* By default virt-manager creates all VMs using legacy bios firmware. You can only change this from the virt-manager GUI during the creation phase by selecting the option to customize
+
+To use UEFI in virt-manager, you must check the box for "Customize configuration before install" on the final step before before clicking the "Finish" button. If you've checked the box, then after clicking "Finish" it should take you to the Overview tab for the configuration. The very last option on this tab should be a dropdown labeled "firmware". I selected `UEFI x86_64: /usr/share/edk2/ovmf/OVMF_CODE.fd` from this dropdown then hit the "Begin Installation" button in the top-left corner.
+
+If you have already created a VM and either were not aware of this option or forget to set it before you started the VM, then there is no way to change the firmware from the GUI that I'm aware of. You will instead need to completely shut-off / stop the VM then use the terminal to edit the firmware.
+
+
+## Changes from ReckZero version
+
+1. Removed swap partition; I consider these option since Anaconda with Automatic partitioning doesn't create them.
+2. I will be using the btrfs filesystem instead of ext4 for the root partition. However, I will not be using any named subvolumes in this iteration (or technically speaking, I am using an unnamed subvolume, e.g. `subvol=/`).
+3. Since I plan on eventually duplicating "Anaconda with Automatic partitioning", I will be creating a `/boot` partition as a placeholder. This partition is *NOT* strictly required, nor actually even used by this particular iteration.
+4. Since I have more installs to do, I won't be installing a desktop in all of the tests. I will only be confirming that I can boot into a minimal install and login with both root and a "test" account.
+5. I will be attempting to reduce prompts as much as possible so you will see me piping responses to various commands like `fdisk` and `passwd` as well as using flags like `dnf install -y` or `rm -rf` to avoid prompts.
+
+**All commands below assume that this is running in a VM. You should pratice in a VM first, make your *own* carefully reviewed notes, and understand all commands before running these commands against a real, baremetal system. Backups are YOUR responsibility. These notes are for *my* reference only so don't blame me if you mess up your system because you ran something you didn't understand. My notes are provided AS-IS with no warranty whatsoever, either express or implied.**
+
+You have been warned. ;-)
 
 
 ## UEFI partitioning setup:

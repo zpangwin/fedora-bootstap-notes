@@ -28,6 +28,7 @@ You have been warned. ;-)
 | Setup name                       | Status | System    | Rootfs | Subvols? | Bootloader   | LUKS | Swap | Multi-OS | Brief Description |
 |:--------------------------------:|:------:|:---------:|:------:|:------:|:------------:|:----:|:----:|:--------:|:-----------------:|
 | [reckzero-uefi-ext4-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md) | WIP | UEFI | ext4 | N/A |  GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
+| [uefi-001_btrfs-no-subvols](./uefi-001_btrfs-no-subvols)   | WIP     | UEFI | btrfs  | none | GRUB2        | no   | yes  | no       | focus on scripting prompts + btrfs |
 
 ## Virt-manager configuration
 
