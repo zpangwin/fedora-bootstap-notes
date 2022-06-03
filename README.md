@@ -38,6 +38,14 @@ Host:
 * CPU: AMD FX-9590 with 8-cores
 * Memory: 32 GiB RAM
 * OS: Fedora 35
+* I had updated virt-manager to use user-space\* (e.g. `qemu://session`) instead of letting it default to running under root.
+
+\* In gtk-based desktops (Gnome/Cinnamon/Xfce/Mate), you can do this by apply the following settings:
+
+    gsettings set org.virt-manager.virt-manager.connections uris "['qemu:///session']"
+    gsettings set org.virt-manager.virt-manager.connections autoconnect "['qemu:///session']"
+    gsettings set org.virt-manager.virt-manager xmleditor-enabled true
+    gsettings set org.virt-manager.virt-manager system-tray true
 
 My guest VMs were created in virt-manager with the following attributes:
 
@@ -51,8 +59,16 @@ My guest VMs were created in virt-manager with the following attributes:
 
 To use UEFI in virt-manager, you must check the box for "Customize configuration before install" on the final step before before clicking the "Finish" button. If you've checked the box, then after clicking "Finish" it should take you to the Overview tab for the configuration. The very last option on this tab should be a dropdown labeled "firmware". I selected `UEFI x86_64: /usr/share/edk2/ovmf/OVMF_CODE.fd` from this dropdown then hit the "Begin Installation" button in the top-left corner. If you want secure boot, choose the other UEFI option.
 
-If you have already created a VM and either were not aware of this option or forget to set it before you started the VM, then there is no way to change the firmware from the GUI that I'm aware of. You will instead need to completely shut-off / stop the VM then use the terminal to edit the firmware.
+If you have already created a VM and either were not aware of this option or forget to set it before you started the VM, then there is no way to change the firmware from the GUI that I'm aware of. You will instead need to completely shut-off / stop the VM then use the terminal to edit the firmware. If you need to do so, then following instructions [here](https://unix.stackexchange.com/questions/612813/virt-manager-change-firmware-after-installation), you can (again VM should be OFF):
 
+1. Find your vm's xml file (e.g. under `~/.config/libvirt/qemu/VM_NAME.xml` if running under user-space or `/etc/libvirt/qemu/VM_NAME.xml` if running under root).
+
+2. Open the appropriate xml file in an editor and add the following as child elements under the `<os>` section, replacing <YOUR_NAME> and <VM_NAME> with the appropriate values:
+
+    <loader readonly='yes' type='pflash'>/usr/share/edk2/ovmf/OVMF_CODE.fd</loader>
+    <nvram>/home/<YOUR_NAME>/.config/libvirt/qemu/nvram/<VM_NAME>_VARS.fd</nvram>
+ 
+3. The file refered to in `<nvram>` does not have to exist; it will be created. If running under root, this path should be `/etc/libvirt/qemu/nvram/<VM_NAME>_VARS.fd` instead
 
 
 
