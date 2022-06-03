@@ -5,29 +5,6 @@ This is basically my just tweaking the install I had done in [reckzero-uefi-ext4
 One of my goals is also to eventually tweak the instructions from the install to get as close as possible to a minimal install done normally with Anaconda from the ["Everything" netinstall iso](https://alt.fedoraproject.org/).
 
 
-## Virt-manager configuration
-
-Host:
-
-* CPU: AMD FX-9590 with 8-cores
-* Memory: 32 GiB RAM
-* OS: Fedora 35
-
-My guest VMs were created in virt-manager with the following attributes:
-
-* Memory: 4096 bytes (e.g. 4 GiB)
-* CPUs: 2 (e.g. 2 cores)
-* 20 GiB virtual HDD space
-* UEFI\* / Q35 chipset (I did not use the secure boot option for this iteration).
-* defaults for everything else
-
-\* By default virt-manager creates all VMs using legacy bios firmware. You can only change this from the virt-manager GUI during the creation phase by selecting the option to customize
-
-To use UEFI in virt-manager, you must check the box for "Customize configuration before install" on the final step before before clicking the "Finish" button. If you've checked the box, then after clicking "Finish" it should take you to the Overview tab for the configuration. The very last option on this tab should be a dropdown labeled "firmware". I selected `UEFI x86_64: /usr/share/edk2/ovmf/OVMF_CODE.fd` from this dropdown then hit the "Begin Installation" button in the top-left corner.
-
-If you have already created a VM and either were not aware of this option or forget to set it before you started the VM, then there is no way to change the firmware from the GUI that I'm aware of. You will instead need to completely shut-off / stop the VM then use the terminal to edit the firmware.
-
-
 ## Changes from ReckZero version
 
 1. This will be done with legacy bios firmware instead of UEFI.
