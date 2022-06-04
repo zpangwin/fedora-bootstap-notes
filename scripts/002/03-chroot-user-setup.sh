@@ -52,4 +52,19 @@ else
 	exit 10;
 fi
 
-echo "TODO: Do it yourself for now..."
+if [[ -z "${NEWPASS}" ]]; then
+	echo "E: 'NEWPASS' not exported. Export and try again or do it manually...";
+	exit 1;
+fi
+
+NEWUSER='test';
+
+useradd --shell /bin/bash $NEWUSER;
+usermod -aG wheel $NEWUSER;
+printf '%s\n%s\n' "$NEWPASS" "$NEWPASS" | passwd $NEWUSER;
+printf '%s\n%s\n' "$NEWPASS" "$NEWPASS" | passwd root;
+
+# setup user aliases
+printf '%s\n%s\n%s\n%s\n' "alias l='ls -acl'" "alias up='cd ..'" "alias up2='cd ../..'" "alias q='exit'" >> /home/$NEWUSER/.bashrc;
+printf '%s\n%s\n%s\n' "alias pg='pgrep -ifa'" "alias pk='pkill -9 -if'" "alias e='echo'" >> /home/$NEWUSER/.bashrc;
+
