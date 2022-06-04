@@ -37,11 +37,11 @@ Partitioning:
     test -d /sys/firmware/efi && echo 'uefi' || echo 'bios';
     getenforce
     alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias q='exit';
-    printf '%s\n%s\n%s\n%s\n%s\n%s\n' 'd' '3' 'd' '2' 'd' 'w' | fdisk /dev/vda; wipefs --all /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n' 'o' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n%s\n\n%s\n%s\n%s\n' 'n' 'p' '1' '+1G' 'Y' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n%s\n' 'a' '1' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n%s\n\n\n%s\n%s\n' 'n' 'p' '3' 'Y' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
+    for i in {3..1}; do parted /dev/vda rm $i --script 2>/dev/null; done; wipefs --all /dev/vda;
+    parted /dev/vda mklabel msdos --script;
+    parted /dev/vda mkpart primary ext4 1M 1024MiB --script;
+    parted /dev/vda mkpart primary btrfs 1025MiB 100% --script;
+    parted /dev/vda set 1 boot on --script;
 
 
 Pre-chroot:

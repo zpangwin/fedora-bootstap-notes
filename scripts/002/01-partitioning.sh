@@ -66,35 +66,40 @@ setenforce 0;
 alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias q='exit';
 
 # delete any existing partitions on VM disk (doesn't always clear it perfectly but mostly works ok - display for user to verify at end)
-printf '%s\n%s\n%s\n%s\n%s\n%s\n' 'd' '3' 'd' '2' 'd' 'w' | fdisk /dev/vda;
+for i in {3..1}; do
+	parted /dev/vda rm $i --script 2>/dev/null;
+done
 wipefs --all /dev/vda;
 
 # create and format partitions
 if [[ 'uefi' == "${SYSTEM_TYPE}" ]]; then
 	# setup as GPT
-    printf '%s\n%s\n' 'g' 'w' | fdisk /dev/vda && clear;
+    parted /dev/vda mklabel gpt --script;
 
     # create partition 1 as ESP (EFI System Partition) for vfat /boot/efi
-    printf '%s\n%s\n\n%s\n%s\n%s\n' 'n' '1' '+600M' 'Y' 'w' | fdisk /dev/vda && clear;
-    printf '%s\n%s\n%s\n' 't' '1' 'w' | fdisk /dev/vda && clear;
+    parted /dev/vda mkpart fat32 1M 601MiB --script;
 
     # create partition 2 as 1GB for ext4 /boot
-    printf '%s\n%s\n\n%s\n%s\n%s\n' 'n' '2' '+1G' 'Y' 'w' | fdisk /dev/vda && clear;
+    parted /dev/vda mkpart ext4 601MiB 1625MiB --script;
 
     # create partition 3 (all remaining space) as btrfs /
-    printf '%s\n%s\n\n\n%s\n%s\n' 'n' '3' 'Y' 'w' | fdisk /dev/vda && clear;
+    parted /dev/vda mkpart btrfs 1625MiB 100% --script;
+
+	# mark EFI partition as "bootable" and "ESP" (EFI System Partition)
+    parted /dev/vda set 1 boot on --script;
+
 else
 	# setup as MBR
-    printf '%s\n%s\n' 'o' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
+    parted /dev/vda mklabel msdos --script;
 
     # create partition 1 as 1GB for ext4 /boot
-    printf '%s\n%s\n%s\n\n%s\n%s\n%s\n' 'n' 'p' '1' '+1G' 'Y' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-
-    # set MBR "boot" / "active" flag for partition 1
-    printf '%s\n%s\n%s\n' 'a' '1' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
+    parted /dev/vda mkpart primary ext4 1M 1024MiB --script;
 
     # create partition 2 (all remaining space) as btrfs /
-    printf '%s\n%s\n%s\n\n\n%s\n%s\n' 'n' 'p' '3' 'Y' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
+    parted /dev/vda mkpart primary btrfs 1025MiB 100% --script;
+
+    # set MBR "boot" / "active" flag for partition 1
+    parted /dev/vda set 1 boot on --script;
 fi
 
 # print so it can be manually confirmed ... sometimes fdisk doesn't always clean old partitions correctly...

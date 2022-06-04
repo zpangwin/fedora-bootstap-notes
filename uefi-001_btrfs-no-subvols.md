@@ -38,12 +38,13 @@ Partitioning:
     test -d /sys/firmware/efi && echo 'uefi' || echo 'bios';
     getenforce
     alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias q='exit';
-    printf '%s\n%s\n%s\n%s\n%s\n%s\n' 'd' '3' 'd' '2' 'd' 'w' | fdisk /dev/vda; wipefs --all /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n' 'g' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n\n%s\n%s\n%s\n' 'n' '1' '+600M' 'Y' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n%s\n' 't' '1' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n\n%s\n%s\n%s\n' 'n' '2' '+1G' 'Y' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
-    printf '%s\n%s\n\n\n%s\n%s\n' 'n' '3' 'Y' 'w' | fdisk /dev/vda; clear; fdisk -l /dev/vda;
+    for i in {3..1}; do parted /dev/vda rm $i --script 2>/dev/null; done; wipefs --all /dev/vda;
+    parted /dev/vda mklabel gpt --script;
+    parted /dev/vda mkpart fat32 1M 601MiB --script;
+    parted /dev/vda mkpart ext4 601MiB 1625MiB --script;
+    parted /dev/vda mkpart btrfs 1625MiB 100% --script;
+    parted /dev/vda set 1 boot on --script;
+    clear; fdisk -l /dev/vda;
 
 
 Pre-chroot:
