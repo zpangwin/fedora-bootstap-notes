@@ -30,6 +30,7 @@ You have been warned. ;-)
 | [reckzero-uefi-ext4-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md) | Retest | UEFI | ext4 | N/A |  GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
 | [bios-001_btrfs-no-subvols.md](./bios-001_btrfs-no-subvols.md) | Passed | BIOS | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
 | [uefi-001_btrfs-no-subvols](./uefi-001_btrfs-no-subvols)   | Passed | UEFI | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
+| [bios-002_btrfs-no-subvols.md](./bios-002_btrfs-no-subvols.md) | Passed  | BIOS | btrfs  | default | GRUB2        | no   | no  | no       | same as 001 but using same subvol names that Anaconda creates by default |
 
 
 ## Virt-manager configuration
