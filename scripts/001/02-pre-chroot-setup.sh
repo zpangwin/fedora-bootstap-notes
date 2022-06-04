@@ -99,7 +99,7 @@ dnf --releasever=36 --installroot=/mnt -y groupinstall core;
 # prep for chroot
 for dir in sys dev proc ; do mount --rbind /$dir /mnt/$dir && mount --make-rslave /mnt/$dir ; done;
 /usr/bin/cp --remove-destination /etc/resolv.conf /mnt/etc/resolv.conf;
-systemd-firstboot --root=/mnt --timezone=America/New_York --hostname=fed-bootstrap --setup-machine-id;
+systemd-firstboot --root=/mnt --timezone=America/New_York --hostname=${SYSTEM_TYPE}-bootstrap-01 --setup-machine-id;
 
 # add aliases for chroot session
 printf '%s\n%s\n%s\n%s\n' "alias l='ls -acl'" "alias up='cd ..'" "alias up2='cd ../..'" "alias q='exit'" >> /mnt/root/.bashrc;
