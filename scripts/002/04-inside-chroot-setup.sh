@@ -71,22 +71,26 @@ systemd-firstboot --locale=en_US.UTF-8;
 
 # fstab prep
 rm -f /etc/fstab;
+rootsubvol="root";
+homesubvol="home";
 
 # generate fstab entries
-printf 'UUID=%s  /  btrfs  ol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" "$rootsubvol" >> /etc/fstab;
-
 if [[ 'uefi' == "${SYSTEM_TYPE}" ]]; then
-	# fstab entry for root / os partition
-    printf 'UUID=%s  /  btrfs  compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" >> /etc/fstab;
+    # fstab entry for root / os partition
+    printf 'UUID=%s  /  btrfs  subvol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" "$rootsubvol" >> /etc/fstab;
 
     # fstab entry for UEFI /boot/efi partition
     printf 'UUID=%s  /boot/efi  vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,errors=remount-ro 0 0\n' "$(blkid -s UUID -o value /dev/vda1)" >> /etc/fstab;
+
+    printf 'UUID=%s  /home  btrfs  subvol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" "$homesubvol" >> /etc/fstab;
 else
-	# fstab entry for root / os partition
-    printf 'UUID=%s  /  btrfs  compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda2)" >> /etc/fstab;
+    # fstab entry for root / os partition
+    printf 'UUID=%s  /  btrfs  subvol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda2)" "$rootsubvol" >> /etc/fstab;
 
     # fstab entry for MBR /boot partition
     printf 'UUID=%s  /boot  ext4 defaults        1 2\n' "$(blkid -s UUID -o value /dev/vda1)" >> /etc/fstab;
+
+    printf 'UUID=%s  /home  btrfs  subvol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda2)" "$homesubvol" >> /etc/fstab;
 fi
 
 # install dependencies for booting ...
