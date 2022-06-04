@@ -88,6 +88,11 @@ else
     mount /dev/vda1 /mnt/boot;
 fi
 
+if [[ 0 == "$(mount | grep -c '/mnt')" ]]; then
+	echo "E: mountpoints for /mnt not found. Please check manually...";
+	exit 1;
+fi
+
 # install minimal fedora setup
 dnf --releasever=36 --installroot=/mnt -y groupinstall core;
 
