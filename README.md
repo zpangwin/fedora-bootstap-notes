@@ -28,8 +28,8 @@ You have been warned. ;-)
 | Setup name                       | Status | System    | Rootfs | Subvols? | Bootloader   | LUKS | Swap | Multi-OS | Brief Description |
 |:--------------------------------:|:------:|:---------:|:------:|:------:|:------------:|:----:|:----:|:--------:|:-----------------:|
 | [reckzero-uefi-ext4-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md) | Retest | UEFI | ext4 | N/A |  GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
-| [bios-001_btrfs-no-subvols.md](./bios-001_btrfs-no-subvols.md) | Passed  | BIOS | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
-| [uefi-001_btrfs-no-subvols](./uefi-001_btrfs-no-subvols)   | Retest     | UEFI | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
+| [bios-001_btrfs-no-subvols.md](./bios-001_btrfs-no-subvols.md) | Passed | BIOS | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
+| [uefi-001_btrfs-no-subvols](./uefi-001_btrfs-no-subvols)   | Passed | UEFI | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
 
 
 ## Virt-manager configuration
