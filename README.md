@@ -33,7 +33,41 @@ You have been warned. ;-)
 | [bios-002_btrfs-no-subvols.md](./bios-002_btrfs-no-subvols.md) | <span style="font-weight: bold; color: green">Passed</span> | BIOS | btrfs  | default | GRUB2        | no   | no  | no       | same as 001 but using same subvol names that Anaconda creates by default |
 | [uefi-002_btrfs-no-subvols.md](./uefi-002_btrfs-no-subvols.md) | <span style="font-weight: bold; color: red">FAILED</span> | UEFI | btrfs  | default | GRUB2        | no   | no  | no       | same as 001 but using same subvol names that Anaconda creates by default |
 
+notes:
 
+* fw = firmware
+* fs = filesystem
+* subvol = btrfs subvolume (if unfamiliar with btrfs, this is a dir that can be mounted to any location)
+* default subvolume = the named subvolumes "root" and "home" that are the default when using Anaconda
+* named subvolume = any named subvolumes other than the default (e.g. "@fedora-root", "@fedora-home", etc)
+* passed = i was able to boot to the minimal install without issues
+* failed = i was NOT able to boot to the minimal install without issues
+* retest = needs retesting due to not being 100% sure that the VM or install details were as documented
+
+
+## Known issues
+
+This is to note any issues encountered with using this style of bootstrapping (e.g. using a Fedora live disc to install to a partition via `dnf --releasever=36 --installroot=/mnt -y groupinstall core`) that do not occur when doing the equivalent install via Anaconda.
+
+Statuses are as follows:
+
+* Blocking: Currently, one or more tests are blocked by the issue with no resolution that doesn't involve either backing out changes or installing normally via Anaconda.
+* Non-Blocking: The issue does not currently have a known resolution but you can still boot to an otherwise working minimal install.
+* Resolved: The issue has a known resolution and can be avoided if following the notes associated for that test.
+
+
+| issue no. | status   | conditions                      | description |
+|:---------:|:--------:|:-------------------------------:|:-------------:|
+| 001       | Blocking | uefi + btrfs + named subvolumes | grub menu entries are not generated / can't boot. |
+
+
+## Workarounds
+
+Workarounds for known issues. If issue is not listed, then workaround is not known. If no workaround is known, then installing via Anaconda is the only assumed to be the only known option.
+
+| issue no. | workaround |
+|:---------:|:----------------------------------------------:|
+| 001       | boot to live disc, remount, remove named subvolumes, regen fstab / grub / dracut |
 
 
 ## Virt-manager configuration
