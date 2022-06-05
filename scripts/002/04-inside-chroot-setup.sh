@@ -106,7 +106,9 @@ else
 fi
 
 # install dependencies for booting ...
-dnf install -y btrfs-progs e2fsprogs vim tree;
+dnf install -y fonts-filesystem google-noto-fonts-common google-noto-sans-mono-vf-fonts \
+				google-noto-sans-vf-fonts google-noto-serif-vf-fonts;
+dnf install -y btrfs-progs e2fsprogs vim tree chrony;
 dnf install -y kernel grub2-efi-x64 grub2-efi-x64-modules shim;
 
 if [[ 'bios' == "${SYSTEM_TYPE}" ]]; then

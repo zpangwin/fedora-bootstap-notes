@@ -111,8 +111,10 @@ Back to Chroot (continue system setup):
     printf 'UUID=%s  /boot/efi  vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,errors=remount-ro 0 0\n' "$(blkid -s UUID -o value /dev/vda1)" >> /etc/fstab;
     printf 'UUID=%s  /home  btrfs  subvol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" "$homesubvol" >> /etc/fstab;
     clear;echo "-------------------"; cat /etc/fstab;
-    dnf install -y btrfs-progs e2fsprogs vim tree;
-    dnf install -y kernel grub2-efi-x64 grub2-efi-x64-modules shim;
+    dnf install -y fonts-filesystem google-noto-fonts-common google-noto-sans-mono-vf-fonts \
+                   google-noto-sans-vf-fonts google-noto-serif-vf-fonts;
+    dnf install -y btrfs-progs e2fsprogs vim tree chrony;
+    dnf install -y kernel grub2-efi-x64 grub2-efi-x64-modules shim efibootmgr;
     sed -i 's/^SELINUX=enforcing/SELINUX=permissive/g' /etc/sysconfig/selinux;
     grep ^SELINUX= /etc/sysconfig/selinux;
     grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg;
