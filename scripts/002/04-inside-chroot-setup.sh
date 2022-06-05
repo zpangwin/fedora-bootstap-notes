@@ -111,7 +111,9 @@ dnf install -y fonts-filesystem google-noto-fonts-common google-noto-sans-mono-v
 dnf install -y btrfs-progs e2fsprogs vim tree chrony;
 dnf install -y kernel grub2-efi-x64 grub2-efi-x64-modules shim;
 
-if [[ 'bios' == "${SYSTEM_TYPE}" ]]; then
+if [[ 'uefi' == "${SYSTEM_TYPE}" ]]; then
+	dnf install -y efibootmgr;
+else
     dnf install -y grub2-pc-modules;
     dnf reinstall -y grub2-common;
 fi
