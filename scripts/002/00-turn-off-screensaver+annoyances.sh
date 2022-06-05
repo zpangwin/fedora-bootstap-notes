@@ -79,6 +79,8 @@ CONFIG_DIR="${USER_HOME_DIR}/.config";
 
 case "${ACTIVE_DESKTOP_NAME}" in
 	cinnamon) 
+		echo "  Detected desktop environment as '${ACTIVE_DESKTOP_NAME}'.";
+
 		# Preferences > Screensaver > Delay before starting the screensaver
 		echo "  Disabling screensaver idle delay timeout ...";
 		gsettings set org.cinnamon.desktop.session idle-delay "uint32 0";
@@ -110,6 +112,8 @@ case "${ACTIVE_DESKTOP_NAME}" in
 
 
 	xfce) 
+		echo "  Detected desktop environment as '${ACTIVE_DESKTOP_NAME}'.";
+
 		# Settings Manager > Power Manager > Display Tab > Display Power Management (on/off toggle) = off
 		echo "  Disabling Display Power Management ...";
 		xfconf-query -c 'xfce4-power-manager' -p '/xfce4-power-manager/dpms-enabled' -n -t bool -s false;
