@@ -145,4 +145,8 @@ status:
 
 * FEDORA DOES NOT APPEAR IN GRUB MENU: Can't boot to installed system. Grub appears to be not finding the OS when installed under a btrfs subvolume, despite it obviously working when done via Anaconda.
 
+troubleshooting:
+
+* Repeated the process with UEFI + secure boot and confirmed the same issue is present
+* After comparing packages to an Anaconda install and adding `efibootmgr`, confirmed same issue is present with this package installed
 
