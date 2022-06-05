@@ -122,6 +122,10 @@ case "${ACTIVE_DESKTOP_NAME}" in
 	xfce) 
 		echo "  Detected desktop environment as '${ACTIVE_DESKTOP_NAME}'.";
 
+		# Settings Manager > Power Manager > Display Tab > Blank Display slider (default: 10 min) = 60min
+		echo "  Increase Display Blank Timeout from 10m to 60m ...";
+		xfconf-query -c 'xfce4-power-manager' -p '/xfce4-power-manager/blank-on-ac' -n -t int -s 60;
+
 		# Settings Manager > Power Manager > Display Tab > Display Power Management (on/off toggle) = off
 		echo "  Disabling Display Power Management ...";
 		xfconf-query -c 'xfce4-power-manager' -p '/xfce4-power-manager/dpms-enabled' -n -t bool -s false;
