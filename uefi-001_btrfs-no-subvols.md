@@ -21,6 +21,9 @@ One of my goals is also to eventually tweak the instructions from the install to
 
 You have been warned. ;-)
 
+## Variations
+
+This was tested with both UEFI (OVMF_CODE) and UEFI with Secure Boot (OVMF_CODE.secboot) in virt-manager. No differences were noticed between the two.
 
 ## UEFI/GPT partitioning setup:
 
