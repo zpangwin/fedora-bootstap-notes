@@ -5,6 +5,13 @@ if [[ 0 != "${UID}" ]]; then
 	echo "   This can cause additional issues if the timeout occurs at a";
 	echo "   critical stage.";
 	exit 1;
+
+elif [[ "$(stat -c %d:%i /)" != "$(stat -c %d:%i /proc/1/root/.)" ]]; then
+	echo "Passed: confirmed script is running from chroot.";
+
+else
+	echo "E: This script is intended to be run from chroot.";
+	exit 2;
 fi
 
 VIRTUAL_MACHINE_TYPE='unknown';
