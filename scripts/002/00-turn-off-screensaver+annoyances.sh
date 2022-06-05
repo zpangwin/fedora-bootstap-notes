@@ -10,10 +10,18 @@ if [[ 0 == "${UID}" ]]; then
 	echo "E: This script should NOT be run from 'root' directly because it needs";
 	echo "   to be applied to the live disc user account.";
 	exit 1;
+elif [[ 'liveuser' != "$USER" ]]; then
+	echo "E: This script is intended to be run from a Fedora live disc and";
+	echo "   should not be run against an installed system.";
+	exit 2;
 fi
+
+# don't display first-time sudo lecture
+touch ~/.sudo_as_admin_successful
 
 VIRTUAL_MACHINE_TYPE='unknown';
 IS_VIRTUAL_MACHINE=0;
+
 if [[ 0 != $(sudo dmidecode 2>/dev/null|grep -Pci '(manufacturer|product).*(innotek|QEMU|VirtualBox|VMWare)') ]]; then
 	IS_VIRTUAL_MACHINE=1;
 
@@ -167,8 +175,7 @@ pkill -9 -if sealert;
 # set aliases for current live-disc session
 alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias e='echo'; alias q='exit';
 
-if [[ 'liveuser' == "$USER" ]]; then
-	echo "alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias e='echo'; alias q='exit';" >> ~/.bashrc;
-fi
+echo "alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias e='echo'; alias q='exit';" >> ~/.bashrc;
+echo "alias l='ls -acl'; alias up='cd ..'; alias up2='cd ../..'; alias e='echo'; alias q='exit';" | sudo tee -a /root/.bashrc;
 
 
