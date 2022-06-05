@@ -73,8 +73,10 @@ if [[ -n "${NEWUSER}" && -d "/home/${NEWUSER}" ]]; then
 fi
 
 # setup locale
-dnf install -y glibc-langpack-en;
-systemd-firstboot --locale=en_US.UTF-8;
+langcode='en';
+localecode='en_US';
+dnf install -y glibc-langpack-${langcode};
+systemd-firstboot --locale=${localecode}.UTF-8;
 
 # fstab prep
 rm -f /etc/fstab;

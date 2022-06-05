@@ -97,7 +97,13 @@ Inside Chroot (user setup):
 
 Back to Chroot (continue system setup):
 
-    dnf install -y glibc-langpack-en; systemd-firstboot --locale=en_US.UTF-8;
+    langcode='en';
+    localecode='en_US';
+    dnf install -y glibc-langpack-${langcode};
+    systemd-firstboot --locale=${localecode}.UTF-8;
+    dnf install -y langpacks-core-${langcode} langpacks-core-font-${langcode} langpacks-${langcode};
+    dnf install -y hunspell hunspell-filesystem hunspell-${langcode};
+    dnf install -y hunspell-${localecode};
     rm -f /etc/fstab;
     rootsubvol="root";
     homesubvol="home";
