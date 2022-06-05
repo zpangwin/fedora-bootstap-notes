@@ -27,11 +27,11 @@ You have been warned. ;-)
 
 | Setup name                       | Status | fw    | fs | Subvol | Bootmenu   | LUKS | Swap | Multi-OS | Brief Description |
 |:--------------------------------:|:------:|:---------:|:------:|:------:|:------------:|:----:|:----:|:--------:|:-----------------:|
-| [reckzero-uefi-ext4-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md) | Retest | UEFI | ext4 | N/A |  GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
-| [bios-001_btrfs-no-subvols.md](./bios-001_btrfs-no-subvols.md) | <span style="font-weight: bold; color: green">Passed</span> | BIOS | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
-| [uefi-001_btrfs-no-subvols](./uefi-001_btrfs-no-subvols)   | <span style="font-weight: bold; color: green">Passed</span> | UEFI | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
-| [bios-002_btrfs-no-subvols.md](./bios-002_btrfs-no-subvols.md) | <span style="font-weight: bold; color: green">Passed</span> | BIOS | btrfs  | default | GRUB2        | no   | no  | no       | same as 001 but using same subvol names that Anaconda creates by default |
-| [uefi-002_btrfs-no-subvols.md](./uefi-002_btrfs-no-subvols.md) | <span style="font-weight: bold; color: red">FAILED</span> | UEFI | btrfs  | default | GRUB2        | no   | no  | no       | same as 001 but using same subvol names that Anaconda creates by default |
+| [reckzero-uefi-ext4-bootstrap-setup.md](./reckzero-uefi-ext4-bootstrap-setup.md) | Passed | UEFI | ext4 | N/A |  GRUB2        | no   | yes  | no       | Following steps from Animortis/ReckZero video |
+| [bios-001_btrfs-no-subvols.md](./bios-001_btrfs-no-subvols.md) | Passed | BIOS | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
+| [uefi-001_btrfs-no-subvols](./uefi-001_btrfs-no-subvols)   | Passed | UEFI | btrfs  | none | GRUB2        | no   | no  | no       | focus on scripting prompts + btrfs |
+| [bios-002_btrfs-no-subvols.md](./bios-002_btrfs-no-subvols.md) | Passed | BIOS | btrfs  | default | GRUB2        | no   | no  | no       | same as 001 but using same subvol names that Anaconda creates by default |
+| [uefi-002_btrfs-no-subvols.md](./uefi-002_btrfs-no-subvols.md) | FAILED | UEFI | btrfs  | default | GRUB2        | no   | no  | no       | same as 001 but using same subvol names that Anaconda creates by default |
 
 notes:
 
@@ -43,6 +43,7 @@ notes:
 * passed = i was able to boot to the minimal install without issues
 * failed = i was NOT able to boot to the minimal install without issues
 * retest = needs retesting due to not being 100% sure that the VM or install details were as documented
+* wip = still working on putting together the test, testing it, etc
 
 
 ## Known issues
