@@ -163,6 +163,9 @@ case "${ACTIVE_DESKTOP_NAME}" in
 			fi
 		fi
 
+		echo "";
+		echo "  Please close and re-launch xfce4-terminal for 'unsafe paste' changes to take effect.";
+
     ;;
 
 
