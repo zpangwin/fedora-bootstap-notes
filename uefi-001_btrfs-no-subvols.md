@@ -128,3 +128,46 @@ status:
 * selinux seems to be running fine
 
 
+## Comparison
+
+I created 2 VMs, one with a minimal install done using Anaconda from the "Everything" netinstaller and one with the instructions above. Then I compared differences between the two installed systems.
+
+
+#### Package differences
+
+On both systems, I created a list of installed packages using:
+
+    dnf list --installed | tail -n +2 | awk '{print $1}' | sort > package_list.txt
+
+Then copied the files off to a share on the host system and did a comparison. This is what the anaconda install had that the bootstrap version did not:
+
+    $ diff -u with-bootstrap.txt with-anaconda.txt | grep '^\+'
+      +++ with-anaconda.txt	2022-06-04 22:58:50.372667437 -0400
+      +chrony.x86_64
+      +efibootmgr.x86_64
+      +fonts-filesystem.noarch
+      +google-noto-fonts-common.noarch
+      +google-noto-sans-mono-vf-fonts.noarch
+      +google-noto-sans-vf-fonts.noarch
+      +google-noto-serif-vf-fonts.noarch
+      +hunspell-en-GB.noarch
+      +hunspell-en.noarch
+      +hunspell-en-US.noarch
+      +hunspell-filesystem.x86_64
+      +hunspell.x86_64
+      +langpacks-core-en.noarch
+      +langpacks-core-font-en.noarch
+      +langpacks-en.noarch
+
+If you want your bootstrap version to match more closely, you can run:
+
+    dnf install -y chrony efibootmgr fonts-filesystem google-noto-fonts-common \
+    google-noto-sans-mono-vf-fonts google-noto-sans-vf-fonts google-noto-serif-vf-fonts;
+    dnf install -y hunspell-en-GB hunspell-en hunspell-en-US hunspell-filesystem hunspell \
+    langpacks-core-en langpacks-core-font-en langpacks-en;
+
+Obviously, a good bit of this is either for fonts or is english-language specific; adjust as needed.
+
+* `chrony`: dnf has "An NTP client/server". NTP = Network Time Protocol; aka it's used to keep your system time in sync.
+* `efibootmgr`: dnf has "EFI Boot Manager". wow, you don't say.
+
