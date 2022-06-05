@@ -73,8 +73,6 @@ systemd-firstboot --locale=en_US.UTF-8;
 rm -f /etc/fstab;
 
 # generate fstab entries
-printf 'UUID=%s  /  btrfs  ol=%s,compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" "$rootsubvol" >> /etc/fstab;
-
 if [[ 'uefi' == "${SYSTEM_TYPE}" ]]; then
 	# fstab entry for root / os partition
     printf 'UUID=%s  /  btrfs  compress=zstd:1 0 0\n' "$(blkid -s UUID -o value /dev/vda3)" >> /etc/fstab;
